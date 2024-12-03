@@ -1,0 +1,103 @@
+import random
+
+with open("lista_palavras.txt", "w") as lista_palavras:
+  lista_palavras.write("tijolo\n")
+  lista_palavras.write("quadro\n")
+  lista_palavras.write("parede\n")
+  lista_palavras.write("tomada\n")
+  lista_palavras.write("verde\n")
+  lista_palavras.write("parafuso\n")
+  lista_palavras.write("foto\n")
+  lista_palavras.write("branco\n")
+  lista_palavras.write("computador\n")
+  lista_palavras.write("estofado\n")
+
+def ranking(nome1, pontos1):
+    pontuacao = {nome1, pontos1}
+    with open("jogadores.txt", "a"):
+        jogadores.append(pontuacao)
+    
+    
+
+ 
+def jogar(data2):
+          with open("lista_palavras.txt", "r") as lista_palavras:
+              palavras = [palavra.strip() for palavra in lista_palavras.readlines()]
+          
+    
+          palavra_escolhida = random.choice(palavras).lower()      
+          lista_base = list(palavra_escolhida)
+          lista_erros = []
+          lista_jogador = []
+          lista_acertos = []
+          lista_display = ["_"] * len(lista_base)
+        
+
+          nome1 = input("Digite seu nome: ")
+    
+          while True:
+              erros = len(lista_erros)
+              if erros > 5:
+                  print("PERDEU! A palavra era", palavra_escolhida)
+                  break
+
+              jogada_atual = input("Sua jogada: ")
+              jogada_atual = jogada_atual.lower()
+
+              if len(jogada_atual) != 1:
+                  print("Digite apenas uma letra!")
+                  continue
+
+              lista_jogador.append(jogada_atual)
+
+              if jogada_atual in lista_base:
+                  print("Acertou!")
+                  for i in range(len(lista_base)):
+                      if lista_base[i] == jogada_atual:
+                          lista_display[i] = jogada_atual
+              else:
+                  print("Errou!")
+                  lista_erros.append(jogada_atual)
+
+              if "_" not in lista_display:
+                  print("Parabéns, você ganhou! A palavra era:", palavra_escolhida)
+                  break
+              print(lista_display)
+
+
+
+def adicionar(palavra):
+        with open("lista_palavras.txt", "a") as arquivo:
+            while True:
+        
+                nova_palavra = input("Digite uma palavra para adicionar à lista (ou 'sair' para terminar): ")
+
+                nova_palavra = nova_palavra.lower()
+                nova_palavra = nova_palavra.strip()
+
+                if nova_palavra.lower() == "sair":
+                    print("As palavras foram salvas.")
+                    break
+
+                if nova_palavra == "":
+                    print("Entrada inválida. Por favor, digite uma palavra válida.")
+                    continue
+               
+                arquivo.write(nova_palavra)
+                print("A palavra foi adicionada com sucesso!")
+ 
+
+
+while True:    
+  print("Bem vindo ao melhor jogo da forca!")
+  print("Escolha uma opção: 1. Jogar 2. Ver ranking 3. Adicionar palavra 4. Sair")
+    
+  opcao = int(input("Digite a opção desejada: "))
+
+  if opcao == 1:
+        jogar(opcao)
+  if opcao == 3:
+        adicionar(opcao)
+  if opcao == 4:
+      print("Até a próxima!")
+      break
